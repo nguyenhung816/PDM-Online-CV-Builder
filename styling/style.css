@@ -1,0 +1,73 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* Header section */
+
+.header-text{
+    text-align: left;
+    font-size: 20px;
+    font-weight: 300;
+    color: #333;
+    padding: 20px;
+}
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+}
+.container ul{
+    list-style: none;
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    gap: 20px;
+    padding: 40px 50px 0 0;
+}
+.container ul li a{
+    font-size: 18px;
+    font-weight: 300;
+    color: #333;
+    cursor: pointer;
+    text-decoration: none;
+}
+.container .header-text{
+    text-align: left;
+    font-size: 20px;
+    font-weight: 300;
+    color: #333;
+}
+
+/* Create section */
+.create .container{
+    flex-direction: column;
+    text-align: left;
+    padding: 100px 20px;
+    gap: 20px;
+}
+
+.create-text{
+    display: flex;
+    flex-direction: row;
+    padding-top: 30px;
+    padding-left: 150px;
+    gap: 150px;
+}
+.create-text a{
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.create .container h1{
+    font-size: 50px;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.2;
+    padding-left: 50px;
+}
