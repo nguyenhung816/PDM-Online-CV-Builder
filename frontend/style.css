@@ -1,0 +1,450 @@
+body {
+    font-family: "Poppins", Tahoma, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f7f9fc;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    gap: 15px;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+
+
+.logo {
+    margin-right: 25px;
+}
+
+.logo img {
+    height: 40px;
+}
+.navbar-avatar-img {
+    height: 39px;
+    border-radius: 20%;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+.navbar-left nav a {
+    text-decoration: none;
+    color: #555;
+    margin-right: 25px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navbar-left nav a:hover {
+    color: #007bff;
+}
+
+.navbar-right .btn {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-login {
+    background-color: transparent;
+    border: 1px solid #ced4da;
+    color: #555;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.btn-login:hover {
+    background-color: #f0f2f5;
+}
+
+.btn-signup {
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-signup:hover {
+    background-color: #0056b3;
+}
+
+/* Hero Section */
+.hero-section {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 5%;
+    gap: 50px;
+}
+
+.hero-content-left {
+    flex: 1;
+    max-width: 500px;
+    text-align: left;
+}
+
+.intro-text {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: #555;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #6c757d;
+    color: white;
+    border: 1px solid #6c757d;
+}
+
+.btn-primary:hover {
+    background-color: #5a6268;
+    border-color: #5a6268;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: #6c757d;
+    border: 1px solid #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #f0f2f5;
+    color: #5a6268;
+    border-color: #5a6268;
+}
+
+.social-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.social-icon {
+    font-size: 1.5em;
+    color: #555;
+    transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+    color: #007bff;
+}
+
+.hero-image-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    min-height: 400px;
+    position: relative;
+}
+
+.abstract-cv {
+    width: 300px;
+    height: 380px;
+    position: relative;
+    transform: rotateY(15deg) rotateX(10deg);
+    transform-style: preserve-3d;
+}
+
+/* Login Page Styles */
+.LoginContainer {
+    max-width: 500px;
+    margin-left: 5%;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding: 25px 30px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    font-family: "Poppins", sans-serif;
+}
+
+.LoginContainer:first-of-type {
+    margin-bottom: 20px;
+}
+
+.LoginContainer h2 {
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.LoginContainer button[type="submit"] {
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Sign Up Page */
+.SignUpcontainer {
+    max-width: 500px;
+    margin-left: 5%;
+    margin-right: auto;
+    margin-top: 80px;
+    margin-bottom: 5px;
+    padding: 25px 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    font-family: "Poppins", sans-serif;
+}
+
+.SignUpcontainer:first-of-type {
+    margin-bottom: 20px;
+}
+
+.SignUpcontainer h2 {
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.SignUpcontainer button[type="submit"] {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.form-group label {
+    width: 100px;
+    color: #333;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.form-group input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: "Poppins", sans-serif;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.input-group {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.input-group label {
+    width: 100px;
+    color: #333;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.input-group input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: "Poppins", sans-serif;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.or {
+    text-align: left;
+    margin-left: 5%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: #999;
+}
+
+.social-login {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.btn-facebook, .btn-google {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: white;
+}
+
+.btn-facebook {
+    background-color: #3b5998;
+}
+
+.btn-facebook:hover {
+    background-color: #2d4373;
+}
+
+.btn-google {
+    background-color: #ea4335;
+}
+
+.btn-google:hover {
+    background-color: #c5221f;
+}
+
+.signup-link, .forgot-password, .back-link, .login-link {
+    text-align: left;
+    margin-left: 5%;
+    margin-bottom: 15px;
+}
+
+.signup-link a, .forgot-password a, .back-link a, .login-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.signup-link a:hover, .forgot-password a:hover, .back-link a:hover, .login-link a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 5%;
+    }
+
+    .hero-content-left {
+        max-width: 100%;
+    }
+
+    .cta-buttons {
+        justify-content: center;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+
+    .navbar {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .navbar-left {
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+
+    .navbar-left nav {
+        margin-top: 10px;
+    }
+
+    .navbar-left nav a {
+        margin: 0 10px;
+    }
+
+    .navbar-right {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar-left nav {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        align-items: center;
+    }
+
+    .navbar-left nav a {
+        margin: 5px 0;
+    }
+
+    .hero-image-right {
+        transform: scale(0.8);
+        min-height: auto;
+    }
+
+    .abstract-cv {
+        width: 250px;
+        height: 320px;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-primary, .btn-secondary {
+        width: 100%;
+    }
+
+    .LoginContainer {
+        margin-left: 20px;
+        margin-right: 20px;
+        padding: 20px;
+    }
+
+    .SignUpcontainer {
+        margin-left: 20px;
+        margin-right: 20px;
+        padding: 20px;
+    }
+
+    .input-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .ProfileContainer {
+        border-top: 60px;
+        margin-left: 20px;
+        margin-right: 20px;
+        padding: 20px;
+    }   
+
+    
+}
