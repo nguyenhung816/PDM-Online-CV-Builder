@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="navbar">
+      <div class="navbar-left">
+        <div class="logo">
+          <img src="images/bear.png" alt="Logo" />
+        </div>
+        <nav>
+          <a href="mainpage.html">Home</a>
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+        </nav>
+      </div>
+      <div class="navbar-right">
+        <div class="navbar-avatar">
+          <img src="images/user_avatar.svg" alt="user_avatar" class="navbar-avatar-img"/>
+        </div>
+      </div>
+    </header>
+
+    <div class="LoginContainer">
+        <h2>Login</h2>
+        <form action="#" method="post">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+    <style>
+        .or {
+            text-align: left;
+            margin-left: 5%;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            color: #999;
+        }
+    </style>
+    <p class="or">
+        -------------------------or-------------------------
+    </p>
+    
+    <div class="LoginContainer">
+        <div class="social-login">
+            <button class="btn btn-facebook">
+                <i class="fab fa-facebook-f"></i>
+                Login with Facebook</button>
+            <button class="btn btn-google"><i class="fab fa-google"></i> Login with Google</button>
+        </div>
+        <div class="signup-link">
+            Don't have an account? <a href="signup.html">Sign up</a>
+        </div>
+        <div class="forgot-password">
+            <a href="#">Forgot Password?</a>
+        </div>
+        <div class="back-link">
+            <a href="mainpage.html">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
