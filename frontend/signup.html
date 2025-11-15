@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="navbar-left">
+        <div class="logo">
+          <img src="images/bear.png" alt="Logo" />
+        </div>
+        <nav>
+          <a href="mainpage.html">Home</a>
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+        </nav>
+      </div>
+        <div class="navbar-right">
+        <div class="navbar-avatar">
+          <img src="images/user_avatar.svg" alt="user_avatar" class="navbar-avatar-img"/>
+        </div>
+      </div>
+    </header>
+
+    <div class="SignUpcontainer">
+      <h2>Sign Up</h2>
+      <form method="post" action="#">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        <div class="form-group">
+          <label for="dob">Date of Birth:</label>
+          <input type="date" id="dob" name="dob" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <div class="form-group">
+          <label for="confirm_password">Confirm:</label>
+          <input type="password" id="confirm_password" name="confirm_password" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+      </form>
+    </div>
+    
+
+    <p class="or">-------------------------or-------------------------</p>
+
+      <div class="login-link">
+        Already have an account? <a href="login.html">Login here</a>
+      </div>
+      <div class="back-link">
+        <a href="mainpage.html">Back to Home</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -42,3 +42,32 @@
     font-weight: 300;
     color: #333;
 }
+
+/* Create section */
+.create .container{
+    flex-direction: column;
+    text-align: left;
+    padding: 100px 20px;
+    gap: 20px;
+}
+
+.create-text{
+    display: flex;
+    flex-direction: row;
+    padding-top: 30px;
+    padding-left: 150px;
+    gap: 150px;
+}
+.create-text a{
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.create .container h1{
+    font-size: 50px;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.2;
+    padding-left: 50px;
+}
