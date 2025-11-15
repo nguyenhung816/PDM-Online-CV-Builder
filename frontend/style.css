@@ -112,6 +112,9 @@ body {
     gap: 15px;
     margin-bottom: 40px;
 }
+.cta-buttons a{
+    text-decoration: none;
+}
 
 .btn-primary, .btn-secondary {
     padding: 12px 25px;
@@ -126,23 +129,25 @@ body {
     background-color: #6c757d;
     color: white;
     border: 1px solid #6c757d;
+    transition: 0.2s;
 }
 
 .btn-primary:hover {
-    background-color: #5a6268;
-    border-color: #5a6268;
+    background-color: #3694dd;
+    border-color: #3694dd;
 }
 
 .btn-secondary {
     background-color: transparent;
     color: #6c757d;
     border: 1px solid #6c757d;
+    transition: 0.2s;
 }
 
 .btn-secondary:hover {
     background-color: #f0f2f5;
-    color: #5a6268;
-    border-color: #5a6268;
+    color: #3694dd;
+    border-color: #3694dd;
 }
 
 .social-icons {
