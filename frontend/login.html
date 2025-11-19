@@ -28,7 +28,7 @@
 
     <div class="LoginContainer">
         <h2>Login</h2>
-        <form action="#" method="post">
+        <form id= "loginForm"action="#" method="post">
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
@@ -70,5 +70,30 @@
             <a href="mainpage.html">Back to Home</a>
         </div>
     </div>
+
+    <script>
+    document.getElementById("loginForm").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        const response = await fetch("http://localhost:3000/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert("Login success!");
+            window.location.href = "mainpage.html"; // redirect
+        } else {
+            alert(data.error);
+        }
+    });
+    </script>
 </body>
+
 </html>
