@@ -1,46 +1,133 @@
-/* Styles for the CV form */
-/* Title section */
-.title {
-    margin-bottom: 20px;
-    display:flex; 
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-
-}
-.title h1{
-    text-align: center;
-    flex: 1;
-    margin: 0;
-    padding-right: 60px;
-}
-.title a {
-    text-decoration: none;
-    color: #333;
-    font-size: 24px;
-    font-weight: bold;
-    text-align: left;
-}
-
-
-form{
-    display: flex;
-    flex-direction: column;
-    max-width: 600px;
+/* =========================================
+   BASE CV PAGE
+========================================= */
+.cv-page {
+    width: 850px;
     margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #f9f9f9;
+    padding: 40px;
+    background: white;
+    font-family: "Poppins", sans-serif;
+    color: #222;
 }
 
-button{
+/* =========================================
+   HEADER (NAME + CONTACT)
+========================================= */
+.cv-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.name-field {
+    font-size: 36px;
+    font-weight: 700;
+    border: none;
+    border-bottom: 2px solid #ddd;
+    width: 80%;
+    text-align: center;
     padding: 10px;
+    outline: none;
+}
+
+.contact-row {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.contact-field {
+    width: 260px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    padding: 6px;
+    font-size: 15px;
+    outline: none;
+}
+
+/* =========================================
+   SECTION TITLES
+========================================= */
+.cv-section-title {
+    margin-top: 35px;
+    font-size: 18px;
+    font-weight: 700;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+
+/* =========================================
+   TEXT BLOCKS (BULLET SECTIONS)
+========================================= */
+.cv-block {
+    width: 100%;
+    min-height: 120px;
+    padding: 12px;
+    margin-top: 10px;
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    resize: vertical;
+    font-size: 14px;
+}
+
+/* =========================================
+   TWO COLUMN SECTIONS
+========================================= */
+.cv-two-col {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.cv-left,
+.cv-right {
+    width: 48%;
+}
+
+/* Thin input lines like on CV */
+.input-line {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #bbb;
+    padding: 6px 4px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    outline: none;
+}
+
+/* =========================================
+   SUBMIT BUTTON
+========================================= */
+.submit-btn {
+    margin-top: 40px;
+    padding: 14px;
+    width: 200px;
     background-color: #4CAF50;
     color: white;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    border-radius: 6px;
     font-size: 16px;
-    margin-top: 10px;
+    cursor: pointer;
 }
+.submit-btn:hover {
+    background-color: #43a047;
+}
+
+.add-btn {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 600;
+}
+.add-btn:hover {
+    background: #3a9b3c;
+}
+
