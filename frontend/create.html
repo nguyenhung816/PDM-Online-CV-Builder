@@ -3,44 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online CV Builder</title>
-
+    <title>Editable CV</title>
     <link rel="stylesheet" href="/styling/cv_style.css">
 </head>
 <body>
-    <div class="title">
-        <a href="mainpage.html"> Go back</a>
-        <h1>CV form</h1>
+
+<div class="title">
+    <a href="mainpage.html">Go back</a>
+</div>
+
+<div class="cv-page">
+
+    <!-- ======= HEADER ======= -->
+    <div class="cv-header">
+        <input type="text" class="name-field" name="CV_FullName" placeholder="Your Full Name">
+        <div class="contact-row">
+            <input type="text" class="contact-field" name="CV_PhoneNumber" placeholder="(+84) Phone Number">
+            <input type="email" class="contact-field" name="CV_Email" placeholder="Email Address">
+            <input type="text" class="contact-field" name="CV_Address" placeholder="You Address">
+            <input type="text" class="contact-field" name="CV_LinkedInURL" placeholder="Your LinkedIn URL">
+        </div>
     </div>
-    <div class="form">
-    <form name="CV form">
-        <p>Name</p>
-        <input type="text" name="Name" placeholder="John Doe" required>
 
-        <p>Date of birth</p>
-        <input type="datetime" name="dateOfBirth" placeholder="1/1/1999" required>
-
-        <p>Phone</p>
-        <input type="text" placeholder="0123456789"></input>
-
-        <p>Email</p>
-        <input type="email" name="Email" placeholder="example@gmail.com" required>
-
-        <p>Education</p>
-        <input type="text" name="Education" placeholder="Your education here..." required>
-
-        <p>Experience</p>
-        <textarea name="Experience" placeholder="Your experience here..." required></textarea>
-
-        <p>Working experience</p>
-        <textarea name="Work" placeholder="Your work experience here..." required></textarea>
-
-        <p>Additional skills</p>
-        <textarea name="skills" placeholder="Your skills here..." required></textarea>
-
-
-        <button type="submit" class="btn btn2">Confirm</button>
-    </form>
+    <!-- ======= EDUCATION ======= -->
+    <h2 class="cv-section-title">EDUCATION AND TRAINING</h2>
+    <div class="cv-two-col">
+        <div class="cv-left">
+            <input type="text" class="input-line" name="SchoolName" placeholder="School / University Name">
+            <input type="text" class="input-line" name="Degree" placeholder="Degree / Program">
+            <input type="text" class="input-line" name="Field of Study" placeholder="Field of Study">
+        </div>
+        <div class="cv-right">
+            <input type="text" class="input-line" name="EduLocation" placeholder="Location">
+            <input type="text" class="input-line" name="EduYears" placeholder="Year / Range">
+        </div>
     </div>
+    <h3>Description</h3>
+    <textarea class="cv-block" name="EduDescription" placeholder="• Details about your education..."></textarea>
+
+    <!-- ======= EXPERIENCE ======= -->
+    <h2 class="cv-section-title">WORK EXPERIENCE</h2>
+    <div id="work-container">
+        <div class="work-block cv-two-col">
+            <div class="cv-left">
+                <input type="text" class="input-line" name="JobTitle" placeholder="Job Title / Role">
+                <input type="text" class="input-line" name="CompanyName" placeholder="Organization / Company name">
+            </div>
+            <div class="cv-right">
+                <input type="text" class="input-line" name="WorkLocation" placeholder="Location">
+                <input type="text" class="input-line" name="WorkDateStare" placeholder="Start Date">
+                <input type="text" class="input-line" name="WorkDateEnd" placeholder="End Date">
+            </div>
+        </div>
+        <button type="button" class="add-btn" onclick="addWork()">➕ Add Work Experience</button>
+        <h3>Description</h3>
+        <textarea class="cv-block" name="WorkDescription" placeholder="• Describe your experience here..."></textarea>
+    </div>
+
+    <!-- ======= SKILLS ======= -->
+    <h2 class="cv-section-title">SKILLS</h2>
+    <div id="skills-container">
+        <div class="skill-block cv-two-col">
+            <div class="cv-left">
+                <input type="text" class="input-line" name="SkillName" placeholder="Skill Name" required>
+
+                <h2 class="input-line">Proficiency Level</h2>
+                <select name="ProficiencyLevel">
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                    <option value="Expert">Expert</option>
+                </select>
+            </div>
+            <div class="cv-right">
+                <input type="text" class="input-line" name="Category" placeholder="e.g., Programming, Software">
+            </div>
+        </div>
+    </div> 
+    <button type="button" class="add-btn" onclick="addSkill()">➕ Add Skill</button>
+
+
+    <!-- ======= Projects ======= -->
+    <h2 class="cv-section-title">PROJECTS</h2>
+    <div id="project-container">
+        <div class="project-block cv-two-col">
+            <div class="cv-left">
+                <input type="text" class="input-line" name="ProjectName" placeholder="Project Name" required>
+            </div>
+            <div class="cv-right">
+                <input type="text" class="input-line" name="ProjectURL" placeholder="Link your project" required>
+            </div>
+        </div>
+        <button type="button" class="add-btn" onclick="addProject()">➕ Add Project</button>
+        <h3>Description</h3>
+        <textarea class="cv-block" name="ProjectDescription" placeholder="• Describe your project here..."></textarea>
+    </div>
+    <button type="submit" class="submit-btn">Save CV</button>
+</div>
+<script>
+    function cloneBlock(containerId, blockClass) {
+        const container = document.getElementById(containerId);
+        const original = container.querySelector('.' + blockClass);
+
+        const clone = original.cloneNode(true);
+
+        // Clear input values
+        clone.querySelectorAll("input, textarea, select").forEach(el => {
+            el.value = "";
+        });
+
+        container.appendChild(clone);
+    }
+
+    function addSkill() {
+        cloneBlock("skills-container", "skill-block");
+    }
+
+    function addWork() {
+        cloneBlock("work-container", "work-block");
+    }
+
+    function addProject() {
+        cloneBlock("project-container", "project-block");
+    }
+</script>
+
 </body>
 </html>

@@ -52,7 +52,6 @@
         <button type="submit" class="btn btn-primary">Sign Up</button>
       </form>
     </div>
-    
 
     <p class="or">-------------------------or-------------------------</p>
 
@@ -63,5 +62,104 @@
         <a href="mainpage.html">Back to Home</a>
       </div>
     </div>
+
+    <script>
+    // show notification
+    function showNotification(type, title, message) {
+      // delete existing notification
+      const existingNotification = document.querySelector('.notification');
+      if (existingNotification) {
+          existingNotification.remove();
+            }
+      // create notification element
+      const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        
+        const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+        
+        notification.innerHTML = `
+            <i class="fas ${icon}"></i>
+            <div class="notification-content">
+                <div class="notification-title">${title}</div>
+                <div class="notification-message">${message}</div>
+            </div>
+            <button class="notification-close">&times;</button>
+        `;
+
+        document.body.appendChild(notification);
+
+        // Handle close button
+        const closeBtn = notification.querySelector('.notification-close');
+        closeBtn.addEventListener('click', () => {
+            notification.classList.add('hiding');
+            setTimeout(() => notification.remove(), 300);
+        });
+        // Auto remove after 10 seconds
+        setTimeout(() => {
+            if (notification.parentElement) {
+                notification.classList.add('hiding');
+                setTimeout(() => notification.remove(), 300);
+            }
+        }, 10000);
+    } 
+    </script>
+
+    <script>
+      // handle form submission
+    document.querySelector('form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const dob = document.getElementById('dob').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm_password').value;
+
+    // check if passwords match
+    if (password !== confirmPassword) {
+        showNotification('error', 'Sign Up Failed', 'Passwords do not match.');
+        return;
+    }
+
+    // check length of password
+    if (password.length < 6) {
+        showNotification('error', 'Sign Up Failed', 'Password must be at least 6 characters long.');
+        return;
+    }
+    // check if email is already exists
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+        const emailExists = users.some(user => user.email === email);
+        
+        if (emailExists) {
+            showNotification('error', 'Sign Up Failed', 'This email is already registered.');
+            return;
+        }
+
+        // store information in local storage
+        const newUser = {
+            name: name,
+            dob: dob,
+            email: email,
+            password: password
+        };
+        
+        users.push(newUser);
+        localStorage.setItem('users', JSON.stringify(users));
+
+        showNotification('success', 'Đăng ký thành công!', `Tài khoản ${email} đã được tạo thành công!`);
+        
+        // Reset form
+        this.reset();
+        
+        // turn back to login after 5 seconds
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 5000);
+    });
+    </script>
+    <!-- // Hero Image -->
+      <div class="hero-image-notification-right">
+        <img src="images/MascotNotify.png" alt="Mascot" class ="hero-image"/>
+      </div>
   </body>
 </html>
