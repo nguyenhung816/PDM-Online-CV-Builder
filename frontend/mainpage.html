@@ -40,7 +40,7 @@
         </p>
         <div class="cta-buttons">
           <a href="create.html" class="btn btn-primary">Create Your Own CV</a>
-          <button class="btn btn-secondary">Pick Templates</button>
+          <button class="btn btn-secondary" onclick="openTemplatePicker()">Pick Templates</button>
         </div>
         <div class="social-icons">
           <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
@@ -60,5 +60,77 @@
     <div class="mascot-say">Start now <i class="fas fa-bolt" style="color: #ffc107;"></i></div>
 </div>
     </main>
+    <div id="templateModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Choose a Template</h2>
+            <p>Select a design to start your CV</p>
+
+            <div class="template-grid">
+                <div class="template-card" onclick="selectTemplate(1)">
+                    <img src="https://placehold.co/150x200/eee/333?text=Classic" alt="Classic">
+                    <h3>1. Classic</h3>
+                </div>
+
+                <div class="template-card" onclick="selectTemplate(2)">
+                    <img src="https://placehold.co/150x200/667eea/ffffff?text=Modern" alt="Modern">
+                    <h3>2. Modern</h3>
+                </div>
+
+                <div class="template-card" onclick="selectTemplate(3)">
+                    <img src="https://placehold.co/150x200/764ba2/ffffff?text=Creative" alt="Creative">
+                    <h3>3. Creative</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const currentUserId = 1; // Simulating logged-in user
+        const modal = document.getElementById('templateModal');
+
+        // 1. Open Modal
+        function openTemplatePicker() {
+            modal.style.display = 'flex';
+        }
+
+        // 2. Close Modal
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // 3. Close if clicking outside
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // 4. Handle Selection
+        function selectTemplate(templateId) {
+            const title = prompt("Great choice! Give your new CV a name:");
+            
+            if (title) {
+                fetch('http://localhost:3000/api/create-cv', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        userId: currentUserId, 
+                        title: title,
+                        templateId: templateId
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    alert("CV Created! Redirecting to your dashboard...");
+                    window.location.href = 'profile.html';
+                })
+                .catch(err => {
+                    console.error("Error:", err);
+                    alert("Error connecting to server. Make sure node server.js is running!");
+                });
+            }
+        }
+    </script>
   </body>
 </html>
