@@ -12,121 +12,269 @@
     <a href="mainpage.html">Go back</a>
 </div>
 
-<div class="cv-page">
 
-    <!-- ======= HEADER ======= -->
-    <div class="cv-header">
-        <input type="text" class="name-field" name="CV_FullName" placeholder="Your Full Name">
-        <div class="contact-row">
-            <input type="text" class="contact-field" name="CV_PhoneNumber" placeholder="(+84) Phone Number">
-            <input type="email" class="contact-field" name="CV_Email" placeholder="Email Address">
-            <input type="text" class="contact-field" name="CV_Address" placeholder="You Address">
-            <input type="text" class="contact-field" name="CV_LinkedInURL" placeholder="Your LinkedIn URL">
-        </div>
-    </div>
+<form id="cvForm">
+    <div class="cv-page">
 
-    <!-- ======= EDUCATION ======= -->
-    <h2 class="cv-section-title">EDUCATION AND TRAINING</h2>
-    <div class="cv-two-col">
-        <div class="cv-left">
-            <input type="text" class="input-line" name="SchoolName" placeholder="School / University Name">
-            <input type="text" class="input-line" name="Degree" placeholder="Degree / Program">
-            <input type="text" class="input-line" name="Field of Study" placeholder="Field of Study">
+        <!-- ======= HEADER ======= -->
+        <div class="cv-header">
+            <input type="text" class="name-field" name="CV_FullName" placeholder="Your Full Name">
+            <div class="contact-row">
+                <input type="text" class="contact-field" name="CV_PhoneNumber" placeholder="(+84) Phone Number">
+                <input type="email" class="contact-field" name="CV_Email" placeholder="Email Address">
+                <input type="text" class="contact-field" name="CV_Address" placeholder="You Address">
+                <input type="text" class="contact-field" name="CV_LinkedInURL" placeholder="Your LinkedIn URL">
+            </div>
         </div>
-        <div class="cv-right">
-            <input type="text" class="input-line" name="EduLocation" placeholder="Location">
-            <input type="text" class="input-line" name="EduYears" placeholder="Year / Range">
-        </div>
-    </div>
-    <h3>Description</h3>
-    <textarea class="cv-block" name="EduDescription" placeholder="• Details about your education..."></textarea>
 
-    <!-- ======= EXPERIENCE ======= -->
-    <h2 class="cv-section-title">WORK EXPERIENCE</h2>
-    <div id="work-container">
-        <div class="work-block cv-two-col">
+        <!-- ======= EDUCATION ======= -->
+        <h2 class="cv-section-title">EDUCATION AND TRAINING</h2>
+        <div class="cv-two-col">
             <div class="cv-left">
-                <input type="text" class="input-line" name="JobTitle" placeholder="Job Title / Role">
-                <input type="text" class="input-line" name="CompanyName" placeholder="Organization / Company name">
+                <input type="text" class="input-line" name="SchoolName" placeholder="School / University Name">
+                <input type="text" class="input-line" name="Degree" placeholder="Degree / Program">
+                <input type="text" class="input-line" name="Field of Study" placeholder="Field of Study">
             </div>
             <div class="cv-right">
-                <input type="text" class="input-line" name="WorkLocation" placeholder="Location">
-                <input type="text" class="input-line" name="WorkDateStare" placeholder="Start Date">
-                <input type="text" class="input-line" name="WorkDateEnd" placeholder="End Date">
+                <input type="text" class="input-line" name="EduLocation" placeholder="Location">
+                <input type="text" class="input-line" name="EduYears" placeholder="Year / Range">
             </div>
         </div>
-        <button type="button" class="add-btn" onclick="addWork()">➕ Add Work Experience</button>
         <h3>Description</h3>
-        <textarea class="cv-block" name="WorkDescription" placeholder="• Describe your experience here..."></textarea>
-    </div>
+        <textarea class="cv-block" name="EduDescription" placeholder="• Details about your education..."></textarea>
 
-    <!-- ======= SKILLS ======= -->
-    <h2 class="cv-section-title">SKILLS</h2>
-    <div id="skills-container">
-        <div class="skill-block cv-two-col">
-            <div class="cv-left">
-                <input type="text" class="input-line" name="SkillName" placeholder="Skill Name" required>
+        <!-- ======= EXPERIENCE ======= -->
+        <h2 class="cv-section-title">WORK EXPERIENCE</h2>
+        <div id="work-container">
+            <div class="work-block cv-two-col">
+                <button type="button" class="remove-btn" onclick="removeBlock(this)">X</button>
+                <div class="cv-left">
+                    <input type="text" class="input-line" name="JobTitle" placeholder="Job Title / Role">
+                    <input type="text" class="input-line" name="CompanyName" placeholder="Organization / Company name">
+                </div>
+                <div class="cv-right">
+                    <input type="text" class="input-line" name="WorkLocation" placeholder="Location">
+                    <input type="date" class="input-line" name="StartDate" placeholder="Start Date">
+                    <input type="date" class="input-line" name="EndDate" placeholder="End Date">
+                </div>
+            </div>
 
-                <h2 class="input-line">Proficiency Level</h2>
-                <select name="ProficiencyLevel">
-                    <option value="Beginner">Beginner</option>
-                    <option value="Intermediate">Intermediate</option>
-                    <option value="Advanced">Advanced</option>
-                    <option value="Expert">Expert</option>
-                </select>
-            </div>
-            <div class="cv-right">
-                <input type="text" class="input-line" name="Category" placeholder="e.g., Programming, Software">
-            </div>
+            <h3 class="work-desc-title">Description</h3>
+            <textarea class="cv-block work-desc" name="WorkDescription" placeholder="• Describe your experience here..."></textarea>
+
+            <button type="button" class="add-btn" onclick="addWork()">➕ Add Work Experience</button>
         </div>
-    </div> 
-    <button type="button" class="add-btn" onclick="addSkill()">➕ Add Skill</button>
+
+        <!-- ======= SKILLS ======= -->
+        <h2 class="cv-section-title">SKILLS</h2>
+        <div id="skills-container">
+            <div class="skill-block cv-two-col">
+                <button type="button" class="remove-btn" onclick="removeBlock(this)">X</button>
+                <div class="cv-left">
+                    <input type="text" class="input-line" name="SkillName" placeholder="Skill Name" required>
+
+                    <h2 class="input-line">Proficiency Level</h2>
+                    <select name="ProficiencyLevel">
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                        <option value="Expert">Expert</option>
+                    </select>
+                </div>
+                <div class="cv-right">
+                    <input type="text" class="input-line" name="Category" placeholder="e.g., Programming, Software">
+                </div>
+            </div>
+        </div> 
+        <button type="button" class="add-btn" onclick="addSkill()">➕ Add Skill</button>
 
 
-    <!-- ======= Projects ======= -->
-    <h2 class="cv-section-title">PROJECTS</h2>
-    <div id="project-container">
-        <div class="project-block cv-two-col">
-            <div class="cv-left">
-                <input type="text" class="input-line" name="ProjectName" placeholder="Project Name" required>
+        <!-- ======= Projects ======= -->
+        <h2 class="cv-section-title">PROJECTS</h2>
+        <div id="project-container">
+            <div class="project-block cv-two-col">
+                <button type="button" class="remove-btn" onclick="removeBlock(this)">X</button>
+                <div class="cv-left">
+                    <input type="text" class="input-line" name="ProjectName" placeholder="Project Name" required>
+                </div>
+                <div class="cv-right">
+                    <input type="text" class="input-line" name="ProjectURL" placeholder="Link your project" required>
+                </div>
             </div>
-            <div class="cv-right">
-                <input type="text" class="input-line" name="ProjectURL" placeholder="Link your project" required>
-            </div>
+            <h3 class="project-desc-title">Description</h3>
+            <textarea class="cv-block project-desc" name="ProjectDescription" placeholder="• Describe your project here..."></textarea>
+            <button type="button" class="add-btn" onclick="addProject()">➕ Add Project</button>
         </div>
-        <button type="button" class="add-btn" onclick="addProject()">➕ Add Project</button>
-        <h3>Description</h3>
-        <textarea class="cv-block" name="ProjectDescription" placeholder="• Describe your project here..."></textarea>
+
+        <!-- ======= Certifications ======= -->
+        <h2 class="cv-section-title">CERTIFICATION</h2>
+        <div id="certification-container">
+            <div class="certification-block cv-two-col">
+                <button type="button" class="remove-btn" onclick="removeBlock(this)">X</button>
+                <div class="cv-left">
+                    <input type="text" class="input-line" name="CertificationName" placeholder="Certification Name" required>
+                    <input type="text" class="input-line" name="IssuingOrganization" placeholder="Issuing Organization" required>
+                    <input type="text" class="input-line" name="CredentialID" placeholder="Credential ID" required>
+                </div>
+                <div class="cv-right">
+                    <input type="date" class="input-line" name="IssueDate" placeholder="Issue Date" required>
+                    <input type="date" class="input-line" name="ExpirationDate" placeholder="Expiration Date" required>
+                    <input type="text" class="input-line" name="CredentialURL" placeholder="Credential URL" required>
+                </div>
+            </div>
+            <button type="button" class="add-btn" onclick="addCertification()">➕ Add Certification</button>
+        </div>
+        <button type="submit" class="submit-btn">Save CV</button>
     </div>
-    <button type="submit" class="submit-btn">Save CV</button>
-</div>
+</form>
+
 <script>
-    function cloneBlock(containerId, blockClass) {
-        const container = document.getElementById(containerId);
-        const original = container.querySelector('.' + blockClass);
+function removeBlock(btn) {
+    const block = btn.closest(".cv-two-col");
+    const container = block.parentElement;
 
-        const clone = original.cloneNode(true);
-
-        // Clear input values
-        clone.querySelectorAll("input, textarea, select").forEach(el => {
-            el.value = "";
-        });
-
-        container.appendChild(clone);
+    // Prevent deleting first block
+    const allBlocks = container.querySelectorAll(".cv-two-col");
+    if (allBlocks.length <= 1) {
+        alert("You must keep at least one entry.");
+        return;
     }
 
-    function addSkill() {
-        cloneBlock("skills-container", "skill-block");
-    }
+    block.remove();
+}
 
-    function addWork() {
-        cloneBlock("work-container", "work-block");
-    }
+function cloneBeforeDescription(containerId, blockClass, descClass) {
+    const container = document.getElementById(containerId);
+    const original = container.querySelector("." + blockClass);
+    const description = container.querySelector("." + descClass);
 
-    function addProject() {
-        cloneBlock("project-container", "project-block");
-    }
+    const clone = original.cloneNode(true);
+
+    clone.querySelectorAll("input, textarea, select").forEach(el => el.value = "");
+
+    // Insert before description
+    container.insertBefore(clone, description);
+
+    // Reattach remove buttons
+    const removeBtn = clone.querySelector(".remove-btn");
+    if (removeBtn) removeBtn.style.display = "inline-block";
+}
+
+function addWork() {
+    cloneBeforeDescription("work-container", "work-block", "work-desc-title");
+}
+
+function addProject() {
+    cloneBeforeDescription("project-container", "project-block", "project-desc-title");
+}
+
+function addSkill() {
+    const container = document.getElementById("skills-container");
+    const original = container.querySelector(".skill-block");
+
+    const clone = original.cloneNode(true);
+
+    clone.querySelectorAll("input, select").forEach(el => el.value = "");
+
+    container.appendChild(clone);
+
+    // enable remove button
+    const removeBtn = clone.querySelector(".remove-btn");
+    if (removeBtn) removeBtn.style.display = "inline-block";
+}
+function addCertification() {
+    const container = document.getElementById("certification-container");
+    const original = container.querySelector(".certification-block");
+
+    const clone = original.cloneNode(true);
+
+    clone.querySelectorAll("input, select").forEach(el => el.value = "");
+
+    container.appendChild(clone);
+
+    // enable remove button
+    const removeBtn = clone.querySelector(".remove-btn");
+    if (removeBtn) removeBtn.style.display = "inline-block";
+}
 </script>
+
+<script>
+document.getElementById("cvForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const formData = {
+        userId: localStorage.getItem("userID"),
+        CV_FullName: document.querySelector("[name='CV_FullName']").value,
+        CV_Email: document.querySelector("[name='CV_Email']").value,
+        CV_PhoneNumber: document.querySelector("[name='CV_PhoneNumber']").value,
+        CV_Address: document.querySelector("[name='CV_Address']").value,
+        CV_LinkedInURL: document.querySelector("[name='CV_LinkedInURL']").value,
+        Education: {
+            SchoolName: document.querySelector("[name='SchoolName']").value,
+            Degree: document.querySelector("[name='Degree']").value,
+            FieldOfStudy: document.querySelector("[name='Field of Study']").value,
+            Location: document.querySelector("[name='EduLocation']").value,
+            Years: document.querySelector("[name='EduYears']").value,
+            Description: document.querySelector("[name='EduDescription']").value,
+        },
+
+        WorkExperience: [...document.querySelectorAll(".work-block")].map(block => ({
+            JobTitle: block.querySelector("[name='JobTitle']").value,
+            CompanyName: block.querySelector("[name='CompanyName']").value,
+            Location: block.querySelector("[name='WorkLocation']").value,
+            Start: block.querySelector("[name='StartDate']").value,
+            End: block.querySelector("[name='EndDate']").value,
+        })),
+
+        WorkDescriptions:
+            document.querySelector(".work-desc").value,
+
+        Skills: [...document.querySelectorAll(".skill-block")].map(block => ({
+            SkillName: block.querySelector("[name='SkillName']").value,
+            ProficiencyLevel: block.querySelector("[name='ProficiencyLevel']").value,
+            Category: block.querySelector("[name='Category']").value,
+        })),
+
+        Projects: [...document.querySelectorAll(".project-block")].map(block => ({
+            ProjectName: block.querySelector("[name='ProjectName']").value,
+            ProjectURL: block.querySelector("[name='ProjectURL']").value,
+        })),
+
+        ProjectDescriptions:
+            document.querySelector("[name='ProjectDescription']").value,
+        
+        Certifications: [...document.querySelectorAll(".certification-block")].map(block => ({
+            CertificationName: block.querySelector("[name='CertificationName']").value,
+            IssuingOrganization: block.querySelector("[name='IssuingOrganization']").value,
+            CredentialID: block.querySelector("[name='CredentialID']").value,
+            IssueDate: block.querySelector("[name='IssueDate']").value,
+            ExpirationDate: block.querySelector("[name='ExpirationDate']").value,
+            CredentialURL: block.querySelector("[name='CredentialURL']").value,
+
+        })),
+    };
+
+    // Send to backend
+    const response = await fetch("http://localhost:3000/api/save-cv", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+    });
+
+    const result = await response.json();
+    alert(result.message);
+});
+</script>
+
+<script>
+const userId = localStorage.getItem("userID");
+
+if (!userId) {
+    alert("You must log in first!");
+    window.location.href = "login.html";
+}
+</script>
+
 
 </body>
 </html>

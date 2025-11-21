@@ -80,6 +80,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 15px;
+    position: relative;
 }
 
 .cv-left,
@@ -129,5 +130,28 @@
 }
 .add-btn:hover {
     background: #3a9b3c;
+}
+
+
+.remove-btn {
+    background: #ff4d4d;
+    border: none;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 5px;
+    width: 28px; 
+    height: 28px;
+    cursor: pointer;
+    font-size: 14px;
+    float: right;
+    margin-bottom: 8px;
+    transition: opacity 0.2s ease;
+    position: absolute;
+    right: -10px;       /* move left by reducing from edge */
+    display: inline-block;
+}
+
+.remove-btn:hover {
+    opacity: 0.8;
 }
 

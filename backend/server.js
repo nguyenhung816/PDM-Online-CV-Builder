@@ -101,6 +101,131 @@ app.post('/api/login', (req, res) => {
     });
 });
 
+// Save CV API
+app.post("/api/save-cv", (req, res) => {
+    const data = req.body;
+
+    const {
+        userId,
+        CV_FullName,
+        CV_Email,
+        CV_PhoneNumber,
+        CV_Address,
+        CV_LinkedInURL,
+        Education,
+        WorkExperience,
+        WorkDescriptions,
+        Skills,
+        Projects,
+        ProjectDescriptions,
+        Certifications
+    } = data;
+
+    // Insert main CV entry
+    const sqlCV = `
+        INSERT INTO cv (UserID, Title, CV_FullName, CV_Email, CV_PhoneNumber, CV_Address, CV_LinkedInURL)
+        VALUES (?, 'test CV', ?, ?, ?, ?, ?)
+    `;
+
+    db.query(sqlCV, [userId, CV_FullName, CV_Email, CV_PhoneNumber, CV_Address, CV_LinkedInURL], 
+        (err, result) => {
+            if (err) return res.json({ error: err });
+
+            const CVID = result.insertId;
+
+            // Insert Education
+            const sqlEdu = `
+                INSERT INTO education (CVID, SchoolName, Degree, FieldOfStudy, Location, Description)
+                VALUES (?, ?, ?, ?, ?, ?)
+            `;
+            db.query(sqlEdu, [
+                CVID,
+                Education.SchoolName,
+                Education.Degree,
+                Education.FieldOfStudy,
+                Education.Location,
+                Education.Description
+            ]);
+
+            // Insert Work Experience
+            const sqlWork = `
+                INSERT INTO work_experience (CVID, JobTitle, CompanyName, Location, StartDate, EndDate, Description)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            `;
+
+            WorkExperience.forEach((w) => {
+                db.query(sqlWork, [
+                    CVID,
+                    w.JobTitle,
+                    w.CompanyName,
+                    w.Location,
+                    w.Start,
+                    w.End,
+                    WorkDescriptions
+                ],(err) => {
+                    if (err) console.log("WORK ERROR:", err);
+                });
+            });
+
+            // Insert Skills
+            const sqlSkill = `
+                INSERT INTO skill (CVID, SkillName, ProficiencyLevel, Category)
+                VALUES (?, ?, ?, ?)
+            `;
+            Skills.forEach((s) => {
+                db.query(sqlSkill, [
+                    CVID,
+                    s.SkillName,
+                    s.ProficiencyLevel,
+                    s.Category
+                ],(err) => {
+                    if (err) console.log("SKILLS ERROR:", err);
+                });
+            });
+
+            // Insert Projects
+            const sqlProject = `
+                INSERT INTO project (CVID, ProjectName, Description, ProjectURL)
+                VALUES (?, ?, ?, ?)
+            `;
+            Projects.forEach((p) => {
+                db.query(sqlProject, [
+                    CVID,
+                    p.ProjectName,
+                    ProjectDescriptions,
+                    p.ProjectURL
+                ],(err) => {
+                    if (err) console.log("PROJECTS ERROR:", err);
+                });
+            });
+
+
+            // Insert Certifications
+            const sqlCertification = `
+                INSERT INTO certification (CVID, CertificationName, IssuingOrganization, IssueDate, ExpirationDate, CredentialID, CredentialURL)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+            `;
+            Certifications.forEach((c) => {
+                db.query(sqlCertification, [
+                    CVID,
+                    c.CertificationName,
+                    c.IssuingOrganization,
+                    c.IssueDate,
+                    c.ExpirationDate,
+                    c.CredentialID,
+                    c.CredentialURL
+                ],(err) => {
+                    if (err) console.log("CERTIFICATIONS ERROR:", err);
+                });
+            });
+
+            return res.json({ message: "CV Saved Successfully!", cvId: CVID });
+        }
+    );
+});
+
+
+
 app.listen(3000, () => {
     console.log('Server running on port 3000');
 });
