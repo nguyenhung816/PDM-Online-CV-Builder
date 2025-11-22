@@ -112,48 +112,6 @@
     } 
     </script>
 
-    <!-- <script>
-      // handle form submission
-    document.querySelector('form').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-
-    // take lists of users from localstorage
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-
-    // find user with matching email and password
-    const user = users.find(u => u.email === email);
-
-        if (!user) {
-            // Email does not exist
-            showNotification('error', 'Login Failed', 'Email does not exist in the system.');
-            return;
-        }
-
-        if (user.password !== password) {
-            // Incorrect password
-            showNotification('error', 'Login Failed', 'Incorrect password. Please try again.');
-            return;
-        }
-
-        // Login successful
-        showNotification('success', 'Login Successful', `Welcome back, ${user.name}!`);
-        
-        // Save login information
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        
-        // Reset form
-        this.reset();
-        
-        // Redirect after 5 seconds
-        setTimeout(() => {
-            window.location.href = 'mainpage.html';
-        }, 5000);
-    });
-    </script> -->
-
     <script>
     document.getElementById("loginForm").addEventListener("submit", async function (e) {
         e.preventDefault();
@@ -170,6 +128,8 @@
         const data = await response.json();
 
         if (response.ok) {
+            localStorage.setItem("userID", data.userID);
+
             showNotification('success', 'Login Successful', `Welcome back!`);
             setTimeout(() => {
                 window.location.href = 'mainpage.html';
