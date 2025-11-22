@@ -205,6 +205,8 @@ document.getElementById("cvForm").addEventListener("submit", async function(e) {
 
     const formData = {
         userId: localStorage.getItem("userID"),
+        Title: localStorage.getItem("SelectedTitle"),
+        TemplateID: localStorage.getItem("SelectedTemplate"),
         CV_FullName: document.querySelector("[name='CV_FullName']").value,
         CV_Email: document.querySelector("[name='CV_Email']").value,
         CV_PhoneNumber: document.querySelector("[name='CV_PhoneNumber']").value,

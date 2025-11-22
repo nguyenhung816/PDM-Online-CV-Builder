@@ -107,6 +107,8 @@ app.post("/api/save-cv", (req, res) => {
 
     const {
         userId,
+        Title,
+        TemplateID,
         CV_FullName,
         CV_Email,
         CV_PhoneNumber,
@@ -123,11 +125,11 @@ app.post("/api/save-cv", (req, res) => {
 
     // Insert main CV entry
     const sqlCV = `
-        INSERT INTO cv (UserID, Title, CV_FullName, CV_Email, CV_PhoneNumber, CV_Address, CV_LinkedInURL)
-        VALUES (?, 'test CV', ?, ?, ?, ?, ?)
+        INSERT INTO cv (UserID, Title, TemplateID, CV_FullName, CV_Email, CV_PhoneNumber, CV_Address, CV_LinkedInURL)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
-    db.query(sqlCV, [userId, CV_FullName, CV_Email, CV_PhoneNumber, CV_Address, CV_LinkedInURL], 
+    db.query(sqlCV, [userId, Title, TemplateID, CV_FullName, CV_Email, CV_PhoneNumber, CV_Address, CV_LinkedInURL], 
         (err, result) => {
             if (err) return res.json({ error: err });
 
