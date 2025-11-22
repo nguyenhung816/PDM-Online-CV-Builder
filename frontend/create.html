@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editable CV</title>
     <link rel="stylesheet" href="/styling/cv_style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
@@ -254,6 +255,99 @@ document.getElementById("cvForm").addEventListener("submit", async function(e) {
         })),
     };
 
+    const { jsPDF } = window.jspdf;
+
+    function generatePDF(formData) {
+        const pdf = new jsPDF();
+        let y = 10;
+
+        pdf.setFontSize(18);
+        pdf.text("Curriculum Vitae", 10, y);
+        y += 10;
+
+        pdf.setFontSize(14);
+        pdf.text("Personal Information", 10, y);
+        y += 8;
+
+        pdf.setFontSize(11);
+        pdf.text(`Name: ${formData.CV_FullName}`, 10, y); y += 6;
+        pdf.text(`Email: ${formData.CV_Email}`, 10, y); y += 6;
+        pdf.text(`Phone: ${formData.CV_PhoneNumber}`, 10, y); y += 6;
+        pdf.text(`Address: ${formData.CV_Address}`, 10, y); y += 6;
+        pdf.text(`LinkedIn: ${formData.CV_LinkedInURL}`, 10, y); y += 10;
+
+        // Education
+        pdf.setFontSize(14);
+        pdf.text("Education", 10, y); 
+        y += 8;
+
+        pdf.setFontSize(11);
+        pdf.text(`${formData.Education.SchoolName}`, 10, y); y += 6;
+        pdf.text(`${formData.Education.Degree} — ${formData.Education.FieldOfStudy}`, 10, y); y += 6;
+        pdf.text(`${formData.Education.Location} (${formData.Education.Years})`, 10, y); y += 6;
+        pdf.text(`Description: ${formData.Education.Description}`, 10, y); y += 10;
+
+        // Work Experience
+        pdf.setFontSize(14);
+        pdf.text("Work Experience", 10, y); 
+        y += 8;
+
+        formData.WorkExperience.forEach((w, i) => {
+            pdf.setFontSize(12);
+            pdf.text(`${i + 1}. ${w.JobTitle} — ${w.CompanyName}`, 10, y); y += 6;
+            pdf.setFontSize(11);
+            pdf.text(`${w.Location}`, 10, y); y += 6;
+            pdf.text(`${w.Start} to ${w.End}`, 10, y); y += 6;
+            pdf.text(`Description: ${formData.WorkDescriptions}`, 10, y); 
+            y += 10;
+        });
+
+        // Skills
+        pdf.setFontSize(14);
+        pdf.text("Skills", 10, y); 
+        y += 8;
+
+        formData.Skills.forEach((s, i) => {
+            pdf.setFontSize(11);
+            pdf.text(`${i + 1}. ${s.SkillName} (${s.ProficiencyLevel}) — ${s.Category}`, 10, y);
+            y += 6;
+        });
+
+        y += 10;
+
+        // Projects
+        pdf.setFontSize(14);
+        pdf.text("Projects", 10, y); 
+        y += 8;
+
+        formData.Projects.forEach((p, i) => {
+            pdf.setFontSize(12);
+            pdf.text(`${i + 1}. ${p.ProjectName}`, 10, y); y += 6;
+            pdf.setFontSize(11);
+            pdf.text(`URL: ${p.ProjectURL}`, 10, y); y += 6;
+            pdf.text(`Description: ${formData.ProjectDescriptions}`, 10, y); y += 10;
+        });
+
+        // Certifications
+        pdf.setFontSize(14);
+        pdf.text("Certifications", 10, y); 
+        y += 8;
+
+        formData.Certifications.forEach((c, i) => {
+            pdf.setFontSize(12);
+            pdf.text(`${i + 1}. ${c.CertificationName}`, 10, y); y += 6;
+            pdf.setFontSize(11);
+            pdf.text(`${c.IssuingOrganization}`, 10, y); y += 6;
+            pdf.text(`Issued: ${c.IssueDate}  Expires: ${c.ExpirationDate}`, 10, y); y += 6;
+            pdf.text(`Credential ID: ${c.CredentialID}`, 10, y); y += 6;
+            pdf.text(`URL: ${c.CredentialURL}`, 10, y); y += 10;
+        });
+
+        pdf.save(`${formData.CV_FullName}_CV.pdf`);
+    }
+    
+    generatePDF(formData);
+
     // Send to backend
     const response = await fetch("http://localhost:3000/api/save-cv", {
         method: "POST",
@@ -263,6 +357,7 @@ document.getElementById("cvForm").addEventListener("submit", async function(e) {
 
     const result = await response.json();
     alert(result.message);
+
 });
 </script>
 
