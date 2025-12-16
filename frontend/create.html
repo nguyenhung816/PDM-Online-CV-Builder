@@ -30,7 +30,7 @@
 
         <!-- ======= EDUCATION ======= -->
         <h2 class="cv-section-title">EDUCATION AND TRAINING</h2>
-        <div class="cv-two-col">
+        <div class="edu-block cv-two-col">
             <div class="cv-left">
                 <input type="text" class="input-line" name="SchoolName" placeholder="School / University Name">
                 <input type="text" class="input-line" name="Degree" placeholder="Degree / Program">
@@ -38,7 +38,8 @@
             </div>
             <div class="cv-right">
                 <input type="text" class="input-line" name="EduLocation" placeholder="Location">
-                <input type="text" class="input-line" name="EduYears" placeholder="Year / Range">
+                <input type="date" class="input-line" name="EduStartDate" placeholder="Start Date">
+                <input type="date" class="input-line" name="EduEndDate" placeholder="End Date">
             </div>
         </div>
         <h3>Description</h3>
@@ -55,8 +56,8 @@
                 </div>
                 <div class="cv-right">
                     <input type="text" class="input-line" name="WorkLocation" placeholder="Location">
-                    <input type="date" class="input-line" name="StartDate" placeholder="Start Date">
-                    <input type="date" class="input-line" name="EndDate" placeholder="End Date">
+                    <input type="date" class="input-line" name="WorkStartDate" placeholder="Start Date">
+                    <input type="date" class="input-line" name="WorkEndDate" placeholder="End Date">
                 </div>
             </div>
 
@@ -212,21 +213,24 @@ document.getElementById("cvForm").addEventListener("submit", async function(e) {
         CV_PhoneNumber: document.querySelector("[name='CV_PhoneNumber']").value,
         CV_Address: document.querySelector("[name='CV_Address']").value,
         CV_LinkedInURL: document.querySelector("[name='CV_LinkedInURL']").value,
-        Education: {
-            SchoolName: document.querySelector("[name='SchoolName']").value,
-            Degree: document.querySelector("[name='Degree']").value,
-            FieldOfStudy: document.querySelector("[name='Field of Study']").value,
-            Location: document.querySelector("[name='EduLocation']").value,
-            Years: document.querySelector("[name='EduYears']").value,
-            Description: document.querySelector("[name='EduDescription']").value,
-        },
+        
+        Education: [...document.querySelectorAll(".edu-block")].map(block => ({
+            SchoolName: block.querySelector("[name='SchoolName']").value,
+            Degree: block.querySelector("[name='Degree']").value,
+            FieldOfStudy: block.querySelector("[name='Field of Study']").value,
+            Location: block.querySelector("[name='EduLocation']").value,
+            Start: block.querySelector("[name='EduStartDate']").value,
+            End: block.querySelector("[name='EduEndDate']").value,
+        })),
+        EduDescriptions: 
+                document.querySelector("[name='EduDescription']").value,
 
         WorkExperience: [...document.querySelectorAll(".work-block")].map(block => ({
             JobTitle: block.querySelector("[name='JobTitle']").value,
             CompanyName: block.querySelector("[name='CompanyName']").value,
             Location: block.querySelector("[name='WorkLocation']").value,
-            Start: block.querySelector("[name='StartDate']").value,
-            End: block.querySelector("[name='EndDate']").value,
+            Start: block.querySelector("[name='WorkStartDate']").value,
+            End: block.querySelector("[name='WorkEndDate']").value,
         })),
 
         WorkDescriptions:
@@ -283,11 +287,15 @@ document.getElementById("cvForm").addEventListener("submit", async function(e) {
         pdf.text("Education", 10, y); 
         y += 8;
 
-        pdf.setFontSize(11);
-        pdf.text(`${formData.Education.SchoolName}`, 10, y); y += 6;
-        pdf.text(`${formData.Education.Degree} — ${formData.Education.FieldOfStudy}`, 10, y); y += 6;
-        pdf.text(`${formData.Education.Location} (${formData.Education.Years})`, 10, y); y += 6;
-        pdf.text(`Description: ${formData.Education.Description}`, 10, y); y += 10;
+        formData.Education.forEach((edu) => {
+            pdf.setFontSize(11);
+            pdf.text(`${edu.SchoolName}`, 10, y); y += 6;
+            pdf.text(`${edu.Degree} — ${edu.FieldOfStudy}`, 10, y); y += 6;
+            const dateRange = (edu.Start && edu.End) ? `${edu.Start} to ${edu.End}` : '';
+            pdf.text(`${edu.Location} ${dateRange}`, 10, y); y += 6;
+            pdf.text(`Description: ${formData.EduDescriptions}`, 10, y); 
+            y += 10;
+        });
 
         // Work Experience
         pdf.setFontSize(14);

@@ -115,6 +115,7 @@ app.post("/api/save-cv", (req, res) => {
         CV_Address,
         CV_LinkedInURL,
         Education,
+        EduDescriptions,
         WorkExperience,
         WorkDescriptions,
         Skills,
@@ -137,17 +138,25 @@ app.post("/api/save-cv", (req, res) => {
 
             // Insert Education
             const sqlEdu = `
-                INSERT INTO education (CVID, SchoolName, Degree, FieldOfStudy, Location, Description)
-                VALUES (?, ?, ?, ?, ?, ?)
+                INSERT INTO education (CVID, SchoolName, Degree, FieldOfStudy, Location, StartDate, EndDate, Description)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             `;
-            db.query(sqlEdu, [
-                CVID,
-                Education.SchoolName,
-                Education.Degree,
-                Education.FieldOfStudy,
-                Education.Location,
-                Education.Description
-            ]);
+            if (Education && Array.isArray(Education)) {
+                Education.forEach((e) =>{
+                    db.query(sqlEdu, [
+                        CVID,
+                        e.SchoolName,
+                        e.Degree,
+                        e.FieldOfStudy,
+                        e.Location,
+                        e.Start,
+                        e.End,
+                        EduDescriptions
+                    ], (err) => {
+                        if (err) console.log("EDU ERROR:", err);
+                    });
+                });
+            }
 
             // Insert Work Experience
             const sqlWork = `
