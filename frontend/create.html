@@ -48,23 +48,24 @@
         <!-- ======= EXPERIENCE ======= -->
         <h2 class="cv-section-title">WORK EXPERIENCE</h2>
         <div id="work-container">
-            <div class="work-block cv-two-col">
-                <button type="button" class="remove-btn" onclick="removeBlock(this)">X</button>
-                <div class="cv-left">
-                    <input type="text" class="input-line" name="JobTitle" placeholder="Job Title / Role">
-                    <input type="text" class="input-line" name="CompanyName" placeholder="Organization / Company name">
+            <div class="work-entry">
+                <div class="work-block cv-two-col">
+                    <button type="button" class="remove-btn" onclick="removeBlock(this)">X</button>
+                    <div class="cv-left">
+                        <input type="text" class="input-line" name="JobTitle" placeholder="Job Title / Role">
+                        <input type="text" class="input-line" name="CompanyName" placeholder="Organization / Company name">
+                    </div>
+                    <div class="cv-right">
+                        <input type="text" class="input-line" name="WorkLocation" placeholder="Location">
+                        <input type="date" class="input-line" name="WorkStartDate" placeholder="Start Date">
+                        <input type="date" class="input-line" name="WorkEndDate" placeholder="End Date">
+                    </div>
                 </div>
-                <div class="cv-right">
-                    <input type="text" class="input-line" name="WorkLocation" placeholder="Location">
-                    <input type="date" class="input-line" name="WorkStartDate" placeholder="Start Date">
-                    <input type="date" class="input-line" name="WorkEndDate" placeholder="End Date">
-                </div>
+
+                <h3 class="work-desc-title">Description</h3>
+                <textarea class="cv-block work-desc" name="WorkDescription" placeholder="• Describe your experience here..."></textarea>
             </div>
-
-            <h3 class="work-desc-title">Description</h3>
-            <textarea class="cv-block work-desc" name="WorkDescription" placeholder="• Describe your experience here..."></textarea>
-
-            <button type="button" class="add-btn" onclick="addWork()">➕ Add Work Experience</button>
+                <button type="button" class="add-btn" onclick="addWork()">➕ Add Work Experience</button>
         </div>
 
         <!-- ======= SKILLS ======= -->
@@ -94,17 +95,19 @@
         <!-- ======= Projects ======= -->
         <h2 class="cv-section-title">PROJECTS</h2>
         <div id="project-container">
-            <div class="project-block cv-two-col">
-                <button type="button" class="remove-btn" onclick="removeBlock(this)">X</button>
-                <div class="cv-left">
-                    <input type="text" class="input-line" name="ProjectName" placeholder="Project Name" required>
+            <div class="project-entry">
+                <div class="project-block cv-two-col">
+                    <button type="button" class="remove-btn" onclick="removeBlock(this)">X</button>
+                    <div class="cv-left">
+                        <input type="text" class="input-line" name="ProjectName" placeholder="Project Name" required>
+                    </div>
+                    <div class="cv-right">
+                        <input type="text" class="input-line" name="ProjectURL" placeholder="Link your project" required>
+                    </div>
                 </div>
-                <div class="cv-right">
-                    <input type="text" class="input-line" name="ProjectURL" placeholder="Link your project" required>
-                </div>
+                    <h3 class="project-desc-title">Description</h3>
+                    <textarea class="cv-block project-desc" name="ProjectDescription" placeholder="• Describe your project here..."></textarea> 
             </div>
-            <h3 class="project-desc-title">Description</h3>
-            <textarea class="cv-block project-desc" name="ProjectDescription" placeholder="• Describe your project here..."></textarea>
             <button type="button" class="add-btn" onclick="addProject()">➕ Add Project</button>
         </div>
 
@@ -162,12 +165,65 @@ function cloneBeforeDescription(containerId, blockClass, descClass) {
     if (removeBtn) removeBtn.style.display = "inline-block";
 }
 
+
 function addWork() {
-    cloneBeforeDescription("work-container", "work-block", "work-desc-title");
+    const container = document.getElementById("work-container");
+    const original = container.querySelector(".work-entry");
+
+    const clone = original.cloneNode(true);
+
+    // clear values
+    clone.querySelectorAll("input, textarea").forEach(el => el.value = "");
+
+    // show remove button
+    clone.querySelector(".remove-btn").style.display = "inline-block";
+
+    // insert before add button
+    const addBtn = container.querySelector(".add-btn");
+    container.insertBefore(clone, addBtn);
 }
 
+function removeWorkEntry(btn) {
+    const entry = btn.closest(".work-entry");
+    const container = document.getElementById("work-container");
+
+    if (container.querySelectorAll(".work-entry").length <= 1) {
+        alert("You must keep at least one entry.");
+        return;
+    }
+
+    entry.remove();
+}
+
+
+
 function addProject() {
-    cloneBeforeDescription("project-container", "project-block", "project-desc-title");
+    const container = document.getElementById("project-container");
+    const original = container.querySelector(".project-entry");
+
+    const clone = original.cloneNode(true);
+
+    // clear values
+    clone.querySelectorAll("input, textarea").forEach(el => el.value = "");
+
+    // show remove button
+    clone.querySelector(".remove-btn").style.display = "inline-block";
+
+    // insert before add button
+    const addBtn = container.querySelector(".add-btn");
+    container.insertBefore(clone, addBtn);
+}
+
+function removeProjectEntry(btn) {
+    const entry = btn.closest(".project-entry");
+    const container = document.getElementById("project-container");
+
+    if (container.querySelectorAll(".project-entry").length <= 1) {
+        alert("You must keep at least one entry.");
+        return;
+    }
+
+    entry.remove();
 }
 
 function addSkill() {
@@ -225,16 +281,14 @@ document.getElementById("cvForm").addEventListener("submit", async function(e) {
         EduDescriptions: 
                 document.querySelector("[name='EduDescription']").value,
 
-        WorkExperience: [...document.querySelectorAll(".work-block")].map(block => ({
-            JobTitle: block.querySelector("[name='JobTitle']").value,
-            CompanyName: block.querySelector("[name='CompanyName']").value,
-            Location: block.querySelector("[name='WorkLocation']").value,
-            Start: block.querySelector("[name='WorkStartDate']").value,
-            End: block.querySelector("[name='WorkEndDate']").value,
+        WorkExperience: [...document.querySelectorAll(".work-entry")].map(entry => ({
+            JobTitle: entry.querySelector("[name='JobTitle']").value,
+            CompanyName: entry.querySelector("[name='CompanyName']").value,
+            Location: entry.querySelector("[name='WorkLocation']").value,
+            Start: entry.querySelector("[name='WorkStartDate']").value,
+            End: entry.querySelector("[name='WorkEndDate']").value,
+            Description: entry.querySelector("[name='WorkDescription']").value
         })),
-
-        WorkDescriptions:
-            document.querySelector(".work-desc").value,
 
         Skills: [...document.querySelectorAll(".skill-block")].map(block => ({
             SkillName: block.querySelector("[name='SkillName']").value,
@@ -242,13 +296,11 @@ document.getElementById("cvForm").addEventListener("submit", async function(e) {
             Category: block.querySelector("[name='Category']").value,
         })),
 
-        Projects: [...document.querySelectorAll(".project-block")].map(block => ({
-            ProjectName: block.querySelector("[name='ProjectName']").value,
-            ProjectURL: block.querySelector("[name='ProjectURL']").value,
+        Projects: [...document.querySelectorAll(".project-entry")].map(entry => ({
+            ProjectName: entry.querySelector("[name='ProjectName']").value,
+            ProjectURL: entry.querySelector("[name='ProjectURL']").value,
+            Description: entry.querySelector("[name='ProjectDescription']").value
         })),
-
-        ProjectDescriptions:
-            document.querySelector("[name='ProjectDescription']").value,
         
         Certifications: [...document.querySelectorAll(".certification-block")].map(block => ({
             CertificationName: block.querySelector("[name='CertificationName']").value,
@@ -308,7 +360,7 @@ document.getElementById("cvForm").addEventListener("submit", async function(e) {
             pdf.setFontSize(11);
             pdf.text(`${w.Location}`, 10, y); y += 6;
             pdf.text(`${w.Start} to ${w.End}`, 10, y); y += 6;
-            pdf.text(`Description: ${formData.WorkDescriptions}`, 10, y); 
+            pdf.text(`Description: ${w.Description}`, 10, y); 
             y += 10;
         });
 
@@ -335,7 +387,7 @@ document.getElementById("cvForm").addEventListener("submit", async function(e) {
             pdf.text(`${i + 1}. ${p.ProjectName}`, 10, y); y += 6;
             pdf.setFontSize(11);
             pdf.text(`URL: ${p.ProjectURL}`, 10, y); y += 6;
-            pdf.text(`Description: ${formData.ProjectDescriptions}`, 10, y); y += 10;
+            pdf.text(`Description: ${p.Description}`, 10, y); y += 10;
         });
 
         // Certifications

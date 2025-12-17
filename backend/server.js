@@ -117,10 +117,8 @@ app.post("/api/save-cv", (req, res) => {
         Education,
         EduDescriptions,
         WorkExperience,
-        WorkDescriptions,
         Skills,
         Projects,
-        ProjectDescriptions,
         Certifications
     } = data;
 
@@ -172,7 +170,7 @@ app.post("/api/save-cv", (req, res) => {
                     w.Location,
                     w.Start,
                     w.End,
-                    WorkDescriptions
+                    w.Description
                 ],(err) => {
                     if (err) console.log("WORK ERROR:", err);
                 });
@@ -203,7 +201,7 @@ app.post("/api/save-cv", (req, res) => {
                 db.query(sqlProject, [
                     CVID,
                     p.ProjectName,
-                    ProjectDescriptions,
+                    p.Description,
                     p.ProjectURL
                 ],(err) => {
                     if (err) console.log("PROJECTS ERROR:", err);
